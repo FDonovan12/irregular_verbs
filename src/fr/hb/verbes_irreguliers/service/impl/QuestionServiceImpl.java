@@ -21,7 +21,7 @@ public class QuestionServiceImpl implements QuestionService {
 		String preterit = "";
 		String pastParticiple = "";
 		try {
-			String[] inputs = input.split(", ?");
+			String[] inputs = Utils.slugify(input).split("-");
 			preterit = inputs[0];
 			pastParticiple = inputs[1];
 		} catch (Exception e) {

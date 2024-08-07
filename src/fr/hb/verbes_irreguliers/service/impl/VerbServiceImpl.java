@@ -4,9 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import fr.hb.verbes_irreguliers.business.Verb;
@@ -25,11 +24,11 @@ public class VerbServiceImpl implements VerbService {
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				String[] values = line.split(",");
-				String baseVerb = values[1].replace("\"", "");
-				String preterit = values[2].replace("\"", "");
-				String pastParticiple = values[3].replace("\"", "");
-				String translate = values[4].replace("\"", "");
+				String[] values = line.replace("\"", "").split(",");
+				String baseVerb = values[1];
+				String pastParticiple = values[2];
+				String preterit = values[3];
+				String translate = values[4];
 				Verb verb = new Verb(baseVerb, preterit, pastParticiple, translate);
 				records.add(verb);
 			}
@@ -46,6 +45,12 @@ public class VerbServiceImpl implements VerbService {
 		return verbs;
 	}
 
+	public List<Verb> getRandomVerbs(int numberOfQuestion) {
+		Collections.shuffle(VerbServiceImpl.getVerbs());
+		List<Verb> verbs = VerbServiceImpl.getVerbs().subList(0, numberOfQuestion);
+		return verbs;
+	}
+	
 	public static void setVerbs(List<Verb> verbs) {
 		VerbServiceImpl.verbs = verbs;
 	}

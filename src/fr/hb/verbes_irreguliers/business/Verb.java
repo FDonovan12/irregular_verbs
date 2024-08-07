@@ -9,7 +9,6 @@ public class Verb {
 	private String pastParticiple;
 	private String translate;
 	private Long count = 0L;
-//	private static List<Verb> verbs;
 
 	public Verb(String baseVerb, String preterit, String pastParticiple, String translate) {
 		this.id = count++;
@@ -37,7 +36,7 @@ public class Verb {
 
 	@Override
 	public String toString() {
-		return String.format("\t %-11s %-11s %-11s",  baseVerb  , preterit  , pastParticiple);
+		return String.format("  %-11s %-11s %-11s",  baseVerb  , preterit  , pastParticiple);
 	}
 
 }

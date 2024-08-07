@@ -3,6 +3,9 @@ package fr.hb.verbes_irreguliers.business;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import fr.hb.verbes_irreguliers.service.Color;
+import fr.hb.verbes_irreguliers.service.Utils;
+
 public class Question {
 	private Long id;
 	private String preteritResponse;
@@ -49,9 +52,23 @@ public class Question {
 	public String getQuestionExam(int i) {
 		Verb verb = this.getVerb();
 		this.resetTimer();
-		return String.format("Question %d : donnez le prétérit et le participe passé du verbe %s (%s) :", i+1, verb.getBaseVerb(), verb.getTranslate());
+		return String.format(" Question %d : donnez le prétérit et le participe passé du verbe %s (%s) :", i+1, verb.getBaseVerb(), verb.getTranslate());
 	}
 	
+	public String getVerbToString() {
+		if(this.isResponseValid()) {
+			return Utils.addColorToContent(verb.toString(), Color.GREEN);
+		}
+		return Utils.addColorToContent(verb.toString(), Color.RED);
+	}
+	
+	public boolean isResponseValid() {
+		Verb verb = this.getVerb();
+		boolean isGoodPreterit = this.getPreteritResponse().equals(verb.getPreterit());
+		boolean isGoodPAstParticple = this.getPastParticipleResponse().equals(verb.getPastParticiple());
+		return isGoodPreterit && isGoodPAstParticple;
+
+	}
 	public Long getTimeResponse() {
 		return ChronoUnit.MILLIS.between(startQuestion, endQuestion);
 	}

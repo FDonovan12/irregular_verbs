@@ -15,4 +15,6 @@ public interface VerbService {
 	public void initVerbsWithCsv();
 	
 	public List<Verb> readCsv(String fileName);
+
+	public List<Verb> getRandomVerbs(int numberOfQuestion);
 }

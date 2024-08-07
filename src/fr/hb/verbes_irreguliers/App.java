@@ -16,7 +16,6 @@ public class App {
 	private static GameService gameService = new GameServiceImpl();
 	private static QuestionService questionService = new QuestionServiceImpl();
 	private static VerbService verbService = new VerbServiceImpl();
-	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		runProject();
@@ -26,15 +25,11 @@ public class App {
 		boolean wantContinue = true;
 		do {
 			gameService.runNewGame();
-			String input = Utils.questionScanner("Voulait vous faire une autre partie ? (Y/N)");
-			if (input.equals("N")) {
+			String input = Utils.questionScanner(" Voulait vous faire une autre partie ? (Y/N)");
+			if (input.toLowerCase().equals("n")) {
 				wantContinue = false;
 			}
 		} while (wantContinue);
 		System.out.println(" Bonne journée. Au revoir.");
-	}
-
-	public static Scanner getScanner() {
-		return scanner;
 	}
 }
